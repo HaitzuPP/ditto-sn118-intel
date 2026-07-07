@@ -23,6 +23,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json holders_seen.json holders_entry.json 2>/dev/null || true
+          git add -A data.json holders_seen.json
+          [ -f holders_entry.json ] && git add holders_entry.json || true
           git diff --staged --quiet || git commit -m "chore: refresh SN118 data $(date -u +%FT%TZ)"
           git push
